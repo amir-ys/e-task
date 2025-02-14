@@ -15,4 +15,9 @@ class Category extends Model
             $category->slug = Str::slug($category->title, '-');
         });
     }
+
+    public static function getTableName(): string
+    {
+        return "categories";
+    }
 }
