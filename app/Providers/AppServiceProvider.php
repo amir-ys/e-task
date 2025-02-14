@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Utilities\CustomPaginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->bindDependencies();
     }
 
     /**
@@ -20,5 +22,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+    }
+
+    /**
+     * @return void
+     */
+    public function bindDependencies(): void
+    {
+        $this->app->bind(
+            LengthAwarePaginator::class,
+            CustomPaginator::class
+        );
     }
 }
