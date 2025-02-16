@@ -46,7 +46,7 @@ class ReindexSearchableModel extends Command
         $model = new $modelName;
         $totalRecords = $model->count();
 
-        if ($totalRecords === 0) {
+        if ($totalRecords == 0) {
             $this->warn("no records found for {$modelName}.");
             return;
         }
@@ -62,7 +62,7 @@ class ReindexSearchableModel extends Command
                 $bulkData[] = [
                     'index' => [
                         '_index' => $model->getSearchIndex(),
-                        '_id'    => $model->getKey(),
+                        '_id' => $model->getKey(),
                     ]
                 ];
                 $bulkData[] = $model->toArray();

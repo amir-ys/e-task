@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             Client::class,
             function ($app) {
-               return \Elasticsearch\ClientBuilder::create()
+                return \Elasticsearch\ClientBuilder::create()
                     ->setHosts([
                         config('services.elasticsearch.host')
                     ])
