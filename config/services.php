@@ -35,7 +35,7 @@ return [
         ],
     ],
     "elasticsearch" => [
-        "host" => env("ELASTICSEARCH", "elasticsearch")
+        "host" => env("ELASTICSEARCH_HOST", "elasticsearch")
     ]
 
 ];
