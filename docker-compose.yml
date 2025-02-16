@@ -20,7 +20,7 @@ services:
         volumes:
             - '.:/var/www/html'
         networks:
-            - ehna-sail
+            - e-sail
         depends_on:
             - mysql
 
@@ -36,10 +36,10 @@ services:
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
         volumes:
-            - 'ehna-sail-mysql:/var/lib/mysql'
+            - 'e-sail-mysql:/var/lib/mysql'
             - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
         networks:
-            - ehna-sail
+            - e-sail
         healthcheck:
             test:
                 - CMD
@@ -71,10 +71,10 @@ services:
             start_period: 10s
 
 networks:
-    ehna-sail:
+    e-sail:
         driver: bridge
 volumes:
-    ehna-sail-mysql:
+    e-sail-mysql:
         driver: local
     sailelasticsearch:
         driver: local
