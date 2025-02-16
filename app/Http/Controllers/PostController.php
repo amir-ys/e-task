@@ -6,7 +6,6 @@ use App\Contracts\Repositories\PostRepositoryInterface;
 use App\Http\Requests\Post\PostRequest;
 use App\Http\Resources\PostResource;
 use App\Utilities\ApiResponse;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 
 class PostController extends Controller
@@ -47,7 +46,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): JsonResponse
+    public function show(int $id): JsonResponse
     {
         $post = $this->postRepository->findOneById($id);
 
@@ -59,15 +58,9 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PostRequest $request, string $id)
+    public function update(PostRequest $request, int $id)
     {
-        $post = $this->postRepository->findOneById($id);
-
-        if (!$post) {
-            return throw new ModelNotFoundException();
-        }
-
-        $this->postRepository->update(
+        $post = $this->postRepository->update(
             $id, $request->validated()
         );
 
@@ -79,9 +72,8 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
-        $this->postRepository->findOneById($id);
         $this->postRepository->destroy($id);
 
         return ApiResponse::success(

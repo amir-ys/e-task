@@ -30,14 +30,18 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $this->query->findOrFail($id);
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): void
     {
-        return $this->query->where('id', $id)->delete();
+        $model = $this->findOneById($id);
+        $model->delete();
     }
 
     public function update(int $id, array $data)
     {
-        return $this->query->where('id', $id)->update($data);
+        $model = $this->findOneById($id);
+        $model->update($data);
+
+        return $model->refresh();
     }
 
     public function insert($data)

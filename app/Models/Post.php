@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Search\ElasticSearchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model
 {
+    use ElasticSearchable;
     protected $guarded = [];
 
     public static function getTableName(): string
