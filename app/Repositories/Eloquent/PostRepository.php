@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Contracts\Repositories\PostRepositoryInterface;
+use App\Contracts\Repositories\Eloquent\PostRepositoryInterface;
 use App\Models\Post;
 
 class PostRepository extends BaseRepository implements PostRepositoryInterface

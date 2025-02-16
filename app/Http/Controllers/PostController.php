@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Repositories\PostRepositoryInterface;
+use App\Contracts\Repositories\Elastic\PostSearchRepositoryInterface;
+use App\Contracts\Repositories\Eloquent\PostRepositoryInterface;
 use App\Http\Requests\Post\PostRequest;
 use App\Http\Resources\PostResource;
 use App\Utilities\ApiResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
 
     public function __construct(
-        protected PostRepositoryInterface $postRepository
+        protected PostRepositoryInterface       $postRepository,
+        protected PostSearchRepositoryInterface $postSearchRepository,
     )
     {
     }
@@ -20,9 +23,11 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $posts = $this->postRepository->paginate();
+        $posts = $request->filled('q')
+            ? $this->postSearchRepository->searchByTitleAndBody($request->query('q'))
+            : $this->postRepository->paginate();
 
         return ApiResponse::success(
             PostResource::collection($posts)
