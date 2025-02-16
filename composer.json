@@ -9,8 +9,8 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
-        "elasticsearch/elasticsearch": "^8.17",
+        "php": "^8.1",
+        "elasticsearch/elasticsearch": "^7",
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9"
